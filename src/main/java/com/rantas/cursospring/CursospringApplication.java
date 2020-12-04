@@ -1,5 +1,6 @@
 package com.rantas.cursospring;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import com.rantas.cursospring.domain.Cidade;
 import com.rantas.cursospring.domain.Cliente;
 import com.rantas.cursospring.domain.Endereco;
 import com.rantas.cursospring.domain.Estado;
+import com.rantas.cursospring.domain.Pagamento;
+import com.rantas.cursospring.domain.PagamentoComBoleto;
+import com.rantas.cursospring.domain.PagamentoComCartao;
+import com.rantas.cursospring.domain.Pedido;
 import com.rantas.cursospring.domain.Produto;
+import com.rantas.cursospring.domain.enums.EstadoPagamento;
 import com.rantas.cursospring.domain.enums.TipoCliente;
 import com.rantas.cursospring.repositories.CategoriaRepository;
 import com.rantas.cursospring.repositories.CidadeRepository;
 import com.rantas.cursospring.repositories.ClienteRepository;
 import com.rantas.cursospring.repositories.EnderecoRepository;
 import com.rantas.cursospring.repositories.EstadoRepository;
+import com.rantas.cursospring.repositories.PagamentoRepository;
+import com.rantas.cursospring.repositories.PedidoRepository;
 import com.rantas.cursospring.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -28,18 +36,18 @@ public class CursospringApplication implements CommandLineRunner {
 	private CategoriaRepository categoriaRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
 	@Autowired
-	private CidadeRepository cidadeRepository;
-	
+	private CidadeRepository cidadeRepository;	
 	@Autowired
-	private EstadoRepository estadoRepository;
-	
+	private EstadoRepository estadoRepository;	
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PagamentoRepository pegamentoRepository;	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursospringApplication.class, args);
@@ -92,6 +100,23 @@ public class CursospringApplication implements CommandLineRunner {
 	
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2019 10:32"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("15/10/2019 17:00"), cli1, e2);
+		
+		Pagamento pgmt1  = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1,6);
+		ped1.setPagamento(pgmt1);
+		
+		Pagamento pgmt2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2,sdf.parse("20/10/2019 00:00"), null);
+		ped2.setPagamento(pgmt2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+		
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+		pegamentoRepository.saveAll(Arrays.asList(pgmt1, pgmt2));
 	}
 
 }

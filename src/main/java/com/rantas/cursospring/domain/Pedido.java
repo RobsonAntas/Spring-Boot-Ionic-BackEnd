@@ -2,6 +2,8 @@ package com.rantas.cursospring.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -34,6 +37,22 @@ public class Pedido implements Serializable{
 		@JoinColumn(name="enderecoDeEntrega_Id")
 		private Endereco enderecoDeEntrega;
 		
+		
+		@OneToMany(mappedBy="id.pedido")
+		private Set<ItemPedido> itens = new HashSet<>();
+		
+		public Pedido() {
+		}
+
+
+		public Pedido(Integer id, Date instante, Cliente cliente ,Endereco enderecoDeEntrega) {
+			super();
+			this.id = id;
+			this.instante = instante;
+			this.cliente= cliente;
+			this.enderecoDeEntrega= enderecoDeEntrega;
+		}
+
 		
 		
 		public Pagamento getPagamento() {
@@ -63,22 +82,7 @@ public class Pedido implements Serializable{
 
 		public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 			this.enderecoDeEntrega = enderecoDeEntrega;
-		}
-
-
-		public Pedido() {
-		}
-
-
-		public Pedido(Integer id, Date instante, Cliente cliente ,Endereco enderecoDeEntrega) {
-			super();
-			this.id = id;
-			this.instante = instante;
-			this.cliente= cliente;
-			this.enderecoDeEntrega= enderecoDeEntrega;
-		}
-
-		
+		}		
 
 		public Integer getId() {
 			return id;
@@ -99,6 +103,18 @@ public class Pedido implements Serializable{
 			this.instante = instante;
 		}
 		
+		
+		
+		public Set<ItemPedido> getItens() {
+			return itens;
+		}
+
+
+		public void setItens(Set<ItemPedido> itens) {
+			this.itens = itens;
+		}
+
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;

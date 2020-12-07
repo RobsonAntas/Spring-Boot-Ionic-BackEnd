@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.rantas.cursospring.domain.Categoria;
+import com.rantas.cursospring.dto.CategoriaDto;
 import com.rantas.cursospring.repositories.CategoriaRepository;
 
 
@@ -55,5 +56,9 @@ public class CategoriaService {
 		
 		PageRequest pageRequest = PageRequest.of(pageNumber, linesPerpage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDto(CategoriaDto objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 }

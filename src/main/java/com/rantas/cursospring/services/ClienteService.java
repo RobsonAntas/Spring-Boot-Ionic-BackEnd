@@ -15,7 +15,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 	
-	public Cliente buscarCliente(Integer id){
+	public Cliente find(Integer id){
 		Optional<Cliente> obj = repo.findById(id);
 		
 		return obj.orElseThrow(()-> new com.rantas.cursospring.services.exceptions.ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: "+Cliente.class.getName()));

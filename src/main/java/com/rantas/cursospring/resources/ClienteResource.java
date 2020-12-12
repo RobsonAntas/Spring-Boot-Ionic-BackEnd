@@ -40,7 +40,7 @@ public class ClienteResource {
 	public ResponseEntity<Void> update(@PathVariable Integer id,@Valid @RequestBody ClienteDto objDto){
 		Cliente obj = service.fromDto(objDto);
 		obj.setId(id);
-		obj = service.update(obj);
+		service.update(obj);
 		return ResponseEntity.noContent().build();
 			
 	}

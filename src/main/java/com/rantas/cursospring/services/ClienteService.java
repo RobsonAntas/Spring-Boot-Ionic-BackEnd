@@ -55,9 +55,9 @@ public class ClienteService {
 		return new Cliente(objDto.getId(),objDto.getNome(),objDto.getEmail(),null,null);
 	}
 	
-	public Cliente inclui(Cliente obj, Cliente newObj) {
-		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
-		newObj.setTipo(obj.getTipo());
+	public Cliente inclui(Cliente newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());;
+		newObj.setEmail(obj.getEmail());
 		return newObj;
 		
 	}

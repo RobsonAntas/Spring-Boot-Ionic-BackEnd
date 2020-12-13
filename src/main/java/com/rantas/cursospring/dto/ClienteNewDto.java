@@ -7,9 +7,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.rantas.cursospring.services.validation.ClientInsert;
+import com.rantas.cursospring.services.validation.ClienteInsert;
 
-@ClientInsert
+@ClienteInsert
 public class ClienteNewDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -15,13 +15,13 @@ import com.rantas.cursospring.repositories.ClienteRepository;
 import com.rantas.cursospring.resources.exceptions.FieldMessage;
 import com.rantas.cursospring.services.validation.utils.BR;
 
-public class ClientInsertValidator implements ConstraintValidator<ClientInsert, ClienteNewDto>{
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDto>{
 	
 	@Autowired
 	private ClienteRepository clienteRepo;
 	
 	@Override
-	public void initialize(ClientInsert constraintAnnotation) {
+	public void initialize(ClienteInsert constraintAnnotation) {
 		
 	}
 	

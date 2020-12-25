@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.rantas.cursospring.services.PedidoService;
-import com.rantas.cursospring.domain.Categoria;
 import com.rantas.cursospring.domain.Pedido;
-import com.rantas.cursospring.dto.CategoriaDto;
+import com.rantas.cursospring.services.PedidoService;
 
 @RestController
 @RequestMapping(value="/pedidos")

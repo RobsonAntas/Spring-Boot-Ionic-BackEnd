@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rantas.cursospring.domain.PagamentoComBoleto;
 import com.rantas.cursospring.domain.PagamentoComCartao;
 
 @Configuration
@@ -17,7 +18,7 @@ public class JacksonConfig {
 		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder() {
 			public void configure(ObjectMapper objectMapper) {
 				objectMapper.registerSubtypes(PagamentoComCartao.class);
-				objectMapper.registerSubtypes(PagamentoComCartao.class);
+				objectMapper.registerSubtypes(PagamentoComBoleto.class);
 				super.configure(objectMapper);
 			}
 		};

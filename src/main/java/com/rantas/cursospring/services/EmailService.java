@@ -14,7 +14,7 @@ public interface EmailService {
 	
 	
 	//Versão Html
-	void sendOrderConfirmationEmailHTML(Pedido pedido);
+	void sendOrderConfirmationHtmlEmail(Pedido pedido);
 
-	void sendEmailHTML(MimeMessage msg);
+	void sendHtmlEmail(MimeMessage msg);
 }
